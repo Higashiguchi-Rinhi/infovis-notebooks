@@ -1,54 +1,56 @@
 ---
-title: "Final presentation 10 Jan"
+title: "Final Presentation 10 Jan"
 author: "Tan Rinhi"
 format:
-  html:toc
-      toc-location: right
-      code-links:
-      - text: Code for Analysis
+  html:
+    toc: true
+    toc-location: right
+    code-links:
+      - text: "Code for Analysis"
         href: https://github.com/Higashiguchi-Rinhi/infovis-notebooks/blob/658a3842b65907151da01ff55cbed7bbdf30f7b9/final_project/project.ipynb
-jupyter: python3
 ---
 
 # 答えたい問い
 
 ・世の中のメロディー大体そんなに遠い音に行かないのではないのか、音が移るのには規則があるのではないか。\
-・音自体がどこに行くのが多いのか、1,2,5音とか。\
+・音自体がどこに行くのが多いのか、1,2,5音とか\
 ・（時間があれば）楽器によってそれが変わるのか
+
+なお、発表者は趣味で音楽を聴く程度のもので、音楽理論とかは勉強したことがないです。
 
 # データの概要、取得と前処理の方法
 
 以下の論文からのデータセットを使用する。
 
-::: {.callout-note appearance="minimal"} John Thickstun, Zaid Harchaoui, & Sham M. Kakade. (2016). MusicNet (1.0) \[Data set\]. Zenodo. https://doi.org/10.5281/zenodo.5120004 :::
+::: {.callout-note appearance="minimal"}
+John Thickstun, Zaid Harchaoui, & Sham M. Kakade. (2016). MusicNet (1.0) \[Data set\]. Zenodo. https://doi.org/10.5281/zenodo.5120004
+:::
 
-kaggle.comにあったデータの概要は以下のようになっている。 ::: {.callout-note appearance="minimal"} MusicNet is a collection of 330 freely-licensed classical music recordings, together with over 1 million annotated labels indicating the precise time of each note in every recording, the instrument that plays each note, and the note's position in the metrical structure of the composition. The labels are acquired from musical scores aligned to recordings by dynamic time warping. The labels are verified by trained musicians; a labeling error rate of 4% has been estimated. The MusicNet labels are offered to the machine learning and music communities as a resource for training models and a common benchmark for comparing results.
+kaggleにあったデータの概要は以下のようになっている。
 
-https://www.kaggle.com/datasets/imsparsh/musicnet-dataset :::
+::: {.callout-note appearance="minimal"}
+MusicNet is a collection of 330 freely-licensed classical music recordings, together with over 1 million annotated labels indicating the precise time of each note in every recording, the instrument that plays each note, and the note's position in the metrical structure of the composition. The labels are acquired from musical scores aligned to recordings by dynamic time warping. The labels are verified by trained musicians; a labeling error rate of 4% has been estimated. The MusicNet labels are offered to the machine learning and music communities as a resource for training models and a common benchmark for comparing results.
+
+https://www.kaggle.com/datasets/imsparsh/musicnet-dataset
+:::
 
 実際のデータを見てみると
 
 1.  作曲家
-
 2.  曲名
-
 3.  楽章番号
-
 4.  アンサンブルの種類(solo, quartet etc.)
-
 5.  楽器
-
 6.  音符
-
 7.  音価
-
 8.  音の開始時間
-
 9.  音の終了時間
 
-    といった変数があり、今回気になるのは楽曲、楽章番号、音符、音の開始時間です。
+といった変数があり、今回気になるのは楽曲、楽章番号、音符、音の開始時間です。
 
 ## データの前処理
+
+### データをmerge, 変数の解読及び変換
 
 メタデータと曲ごとのデータがあったので、idを基に両者を合体した。基本的にtidy dataの形になっていた。データの欠測はないことを確認した。
 
@@ -62,16 +64,44 @@ https://www.kaggle.com/datasets/imsparsh/musicnet-dataset :::
 -   43 is Cello (3rd staff, upper voice)
 -   44 is Double Bass (3rd staff, lower voice)
 
-音価: 60がmiddle Cということを実際の譜面を見て確認。 この分析ではC4とし、半音あがることで1増える。\
-1オクターブ12音あります。
+音価: 60がmiddle Cということを実際の譜面を見て確認。この分析では60をC4する。半音あがることで1増え、1オクターブ12音ある。
 
 これを踏まえて0-98の数字を'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'に対応するものに置き換える。
+
+### **曲を分けて、曲の中でのメロディーラインをつなげる**
+
+また、メロディーの音の移り変わりを見るにはまず曲ごと、次に複数楽器に演奏されている場合は楽器ごとにデータをgroupingする必要があるのでそちらも処理しました。
+
+データセットでは同時に流れる音が同じ「音の開始時間」の入力として全てデータに入れられているので、まず、ラインを特定する必要がある。
+
+1\. Solo pianoなどの楽器が1つしかないもの
+
+2\. Piano quintetなどの楽器が複数あるものを分ける
+
+と、前者の方が処理が簡単になり。なお、これらにおいても鍵盤楽器や弦楽器は複数音同時に出るのでそれを分ける方法も考える必要がある
+
+今回のデータセットでは330曲中単音しか吹けない楽器によるSoloに該当するものは1曲だけでした。今回の分析では、BachによるFlute Soloの"Partita in A minor"という曲を分析しました。これでメロディーラインは抽出できました。
 
 # データ変数と視覚変数の対応関係
 
 # 可視化作品と考察
 
-音の移り替わりなどを見るのに、可能であればinteractiveなもの、<https://www.hooktheory.com/trends#key=A&scale=minor> みたいにできたら面白いと思いました。
+## 考察
+
+Bachはその後のクラシック音楽の基礎を作ったともいえるほどに影響力が大きいとされているので、他の作曲家の曲よりもBachのものを分析できてよかったと思います。また、その後の作曲家に比べて、単純かつ構造がしっかりしているので今回の簡単な分析でも解釈可能な結果になったのはその影響があるかもしれません。
+
+## Future directions
+
+音の移り替わりなどを見るのに、可能であればinteractiveなもの、[こちらのページ](https://www.hooktheory.com/trends#key=A&scale=minor){.uri} みたいにできたら面白いと思いました。
+
+```{=html}
+<iframe width="700" height="500" src="https://www.hooktheory.com/trends#key=A&scale=minor" title="Webpage example"></iframe>
+```
+::: {.callout-note appearance="minimal"}
+Kulkarni, S., David, S. U., Lynn, C. W., & Bassett, D. S. (2024). Information content of note transitions in the music of JS Bach. *Physical Review Research*, 6(1), 013136.
+:::
+
+こちらの論文ではBachの楽曲の各音符をノードに、音符間の各遷移をエッジにネットワーク分析していました。このように数学的に構造化できたら音楽も分析できるのかなと感じました。
 
 # コードかコードへのリンク（あれば）
 

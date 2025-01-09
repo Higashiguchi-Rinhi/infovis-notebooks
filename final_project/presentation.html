@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Higashiguchi Rinhi">
+<meta name="author" content="Tan Rinhi">
 
-<title>Final presentation 10 Jan</title>
+<title>Final Presentation 10 Jan</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -38,15 +38,38 @@ ul.task-list li input[type="checkbox"] {
 
 </head>
 
-<body class="fullcontent">
+<body>
 
 <div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#答えたい問い" id="toc-答えたい問い" class="nav-link active" data-scroll-target="#答えたい問い">答えたい問い</a></li>
+  <li><a href="#データの概要取得と前処理の方法" id="toc-データの概要取得と前処理の方法" class="nav-link" data-scroll-target="#データの概要取得と前処理の方法">データの概要、取得と前処理の方法</a>
+  <ul class="collapse">
+  <li><a href="#データの前処理" id="toc-データの前処理" class="nav-link" data-scroll-target="#データの前処理">データの前処理</a>
+  <ul class="collapse">
+  <li><a href="#データをmerge-変数の解読及び変換" id="toc-データをmerge-変数の解読及び変換" class="nav-link" data-scroll-target="#データをmerge-変数の解読及び変換">データをmerge, 変数の解読及び変換</a></li>
+  <li><a href="#曲を分けて曲の中でのメロディーラインをつなげる" id="toc-曲を分けて曲の中でのメロディーラインをつなげる" class="nav-link" data-scroll-target="#曲を分けて曲の中でのメロディーラインをつなげる"><strong>曲を分けて、曲の中でのメロディーラインをつなげる</strong></a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#データ変数と視覚変数の対応関係" id="toc-データ変数と視覚変数の対応関係" class="nav-link" data-scroll-target="#データ変数と視覚変数の対応関係">データ変数と視覚変数の対応関係</a></li>
+  <li><a href="#可視化作品と考察" id="toc-可視化作品と考察" class="nav-link" data-scroll-target="#可視化作品と考察">可視化作品と考察</a>
+  <ul class="collapse">
+  <li><a href="#考察" id="toc-考察" class="nav-link" data-scroll-target="#考察">考察</a></li>
+  <li><a href="#future-directions" id="toc-future-directions" class="nav-link" data-scroll-target="#future-directions">Future directions</a></li>
+  </ul></li>
+  <li><a href="#コードかコードへのリンクあれば" id="toc-コードかコードへのリンクあれば" class="nav-link" data-scroll-target="#コードかコードへのリンクあれば">コードかコードへのリンク（あれば）</a></li>
+  </ul>
+<div class="quarto-code-links"><h2>Code Links</h2><ul><li><a href="https://github.com/Higashiguchi-Rinhi/infovis-notebooks/blob/658a3842b65907151da01ff55cbed7bbdf30f7b9/final_project/project.ipynb"><i class="bi bi-link-45deg"></i>Code for Analysis</a></li></ul></div></nav>
+</div>
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Final presentation 10 Jan</h1>
+<h1 class="title">Final Presentation 10 Jan</h1>
 </div>
 
 
@@ -56,7 +79,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Higashiguchi Rinhi </p>
+             <p>Tan Rinhi </p>
           </div>
   </div>
     
@@ -72,11 +95,13 @@ ul.task-list li input[type="checkbox"] {
 <section id="答えたい問い" class="level1">
 <h1>答えたい問い</h1>
 <p>・世の中のメロディー大体そんなに遠い音に行かないのではないのか、音が移るのには規則があるのではないか。<br>
-・音自体がどこに行くのが多いのか、1,2,5音とか。<br>
-・（時間次第があれば）楽器によってそれが変わるのか</p>
+・音自体がどこに行くのが多いのか、1,2,5音とか<br>
+・（時間があれば）楽器によってそれが変わるのか</p>
+<p>なお、発表者は趣味で音楽を聴く程度のもので、音楽理論とかは勉強したことがないです。</p>
 </section>
 <section id="データの概要取得と前処理の方法" class="level1">
 <h1>データの概要、取得と前処理の方法</h1>
+<p>以下の論文からのデータセットを使用する。</p>
 <div class="callout callout-style-simple callout-note no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -87,16 +112,88 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </div>
+<p>kaggleにあったデータの概要は以下のようになっている。</p>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>MusicNet is a collection of 330 freely-licensed classical music recordings, together with over 1 million annotated labels indicating the precise time of each note in every recording, the instrument that plays each note, and the note’s position in the metrical structure of the composition. The labels are acquired from musical scores aligned to recordings by dynamic time warping. The labels are verified by trained musicians; a labeling error rate of 4% has been estimated. The MusicNet labels are offered to the machine learning and music communities as a resource for training models and a common benchmark for comparing results.</p>
+<p>https://www.kaggle.com/datasets/imsparsh/musicnet-dataset</p>
+</div>
+</div>
+</div>
+<p>実際のデータを見てみると</p>
+<ol type="1">
+<li>作曲家</li>
+<li>曲名</li>
+<li>楽章番号</li>
+<li>アンサンブルの種類(solo, quartet etc.)</li>
+<li>楽器</li>
+<li>音符</li>
+<li>音価</li>
+<li>音の開始時間</li>
+<li>音の終了時間</li>
+</ol>
+<p>といった変数があり、今回気になるのは楽曲、楽章番号、音符、音の開始時間です。</p>
+<section id="データの前処理" class="level2">
+<h2 class="anchored" data-anchor-id="データの前処理">データの前処理</h2>
+<section id="データをmerge-変数の解読及び変換" class="level3">
+<h3 class="anchored" data-anchor-id="データをmerge-変数の解読及び変換">データをmerge, 変数の解読及び変換</h3>
+<p>メタデータと曲ごとのデータがあったので、idを基に両者を合体した。基本的にtidy dataの形になっていた。データの欠測はないことを確認した。</p>
+<p>メタデータ上に気になる変数である楽器と音価、が見あたらなかったので、数値として入力されている解読をする。</p>
+<p>楽器: <a href="https://music.stackexchange.com/questions/135779/im-having-difficulty-comprehending-the-timing-information-presented-in-the-csv">ここから</a>取得。</p>
+<ul>
+<li>1 is Piano (4th and 5th staff)</li>
+<li>41 is Violin (1st staff)</li>
+<li>42 is Viola (2nd staff)</li>
+<li>43 is Cello (3rd staff, upper voice)</li>
+<li>44 is Double Bass (3rd staff, lower voice)</li>
+</ul>
+<p>音価: 60がmiddle Cということを実際の譜面を見て確認。この分析では60をC4する。半音あがることで1増え、1オクターブ12音ある。</p>
+<p>これを踏まえて0-98の数字を’C’, ‘C#’, ‘D’, ‘D#’, ‘E’, ‘F’, ‘F#’, ‘G’, ‘G#’, ‘A’, ‘A#’, ’B’に対応するものに置き換える。</p>
+</section>
+<section id="曲を分けて曲の中でのメロディーラインをつなげる" class="level3">
+<h3 class="anchored" data-anchor-id="曲を分けて曲の中でのメロディーラインをつなげる"><strong>曲を分けて、曲の中でのメロディーラインをつなげる</strong></h3>
+<p>また、メロディーの音の移り変わりを見るにはまず曲ごと、次に複数楽器に演奏されている場合は楽器ごとにデータをgroupingする必要があるのでそちらも処理しました。</p>
+<p>データセットでは同時に流れる音が同じ「音の開始時間」の入力として全てデータに入れられているので、まず、ラインを特定する必要がある。</p>
+<p>1. Solo pianoなどの楽器が1つしかないもの</p>
+<p>2. Piano quintetなどの楽器が複数あるものを分ける</p>
+<p>と、前者の方が処理が簡単になり。なお、これらにおいても鍵盤楽器や弦楽器は複数音同時に出るのでそれを分ける方法も考える必要がある</p>
+<p>今回のデータセットでは330曲中単音しか吹けない楽器によるSoloに該当するものは1曲だけでした。今回の分析では、BachによるFlute Soloの”Partita in A minor”という曲を分析しました。これでメロディーラインは抽出できました。</p>
+</section>
+</section>
 </section>
 <section id="データ変数と視覚変数の対応関係" class="level1">
 <h1>データ変数と視覚変数の対応関係</h1>
 </section>
 <section id="可視化作品と考察" class="level1">
 <h1>可視化作品と考察</h1>
+<section id="考察" class="level2">
+<h2 class="anchored" data-anchor-id="考察">考察</h2>
+<p>Bachはその後のクラシック音楽の基礎を作ったともいえるほどに影響力が大きいとされているので、他の作曲家の曲よりもBachのものを分析できてよかったと思います。また、その後の作曲家に比べて、単純かつ構造がしっかりしているので今回の簡単な分析でも解釈可能な結果になったのはその影響があるかもしれません。</p>
+</section>
+<section id="future-directions" class="level2">
+<h2 class="anchored" data-anchor-id="future-directions">Future directions</h2>
+<p>音の移り替わりなどを見るのに、可能であればinteractiveなもの、<a href="https://www.hooktheory.com/trends#key=A&amp;scale=minor" class="uri">こちらのページ</a> みたいにできたら面白いと思いました。</p>
+<iframe width="700" height="500" src="https://www.hooktheory.com/trends#key=A&amp;scale=minor" title="Webpage example"></iframe>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Kulkarni, S., David, S. U., Lynn, C. W., &amp; Bassett, D. S. (2024). Information content of note transitions in the music of JS Bach. <em>Physical Review Research</em>, 6(1), 013136.</p>
+</div>
+</div>
+</div>
+<p>こちらの論文ではBachの楽曲の各音符をノードに、音符間の各遷移をエッジにネットワーク分析していました。このように数学的に構造化できたら音楽も分析できるのかなと感じました。</p>
+</section>
 </section>
 <section id="コードかコードへのリンクあれば" class="level1">
 <h1>コードかコードへのリンク（あれば）</h1>
-<p>Github repository link: https://github.com/Higashiguchi-Rinhi/infovis-notebooks.git</p>
+<p>Github repository link: <a href="https://github.com/Higashiguchi-Rinhi/infovis-notebooks/blob/658a3842b65907151da01ff55cbed7bbdf30f7b9/final_project/project.ipynb" class="uri">https://github.com/Higashiguchi-Rinhi/infovis-notebooks/blob/658a3842b65907151da01ff55cbed7bbdf30f7b9/final_project/project.ipynb</a></p>
 </section>
 
 </main>
