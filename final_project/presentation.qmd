@@ -82,13 +82,62 @@ https://www.kaggle.com/datasets/imsparsh/musicnet-dataset
 
 今回のデータセットでは330曲中単音しか吹けない楽器によるSoloに該当するものは1曲だけでした。今回の分析では、BachによるFlute Soloの"Partita in A minor"という曲を分析しました。これでメロディーラインは抽出できました。
 
-# データ変数と視覚変数の対応関係
-
 # 可視化作品と考察
+
+## 音価の変化と時間
+
+![Figure 1](notediff_time.html){width="100%" height="7in"}
+
+データ変数と視覚変数の対応関係
+
+| データ変数           | 視覚変数    |
+|----------------------|-------------|
+| 音符(12音、名義尺度) | 色          |
+| 音価の差(連続変数)   | y軸上の高さ |
+
+これを見るだけでは似たようなトレンドがあるかもしれない、ということしかわからない。
+
+## 音価の変化とその数
+
+音価の変化とその数を図示。\
+このとき、音符の情報も色として積み上げ棒グラフに入れる。\
++-2の音の差が多いことが分かります。
+
+![Figure 2](notediff_count_all.html){#fig-2 width="100%" height="3in"}
+
+| データ変数             | 視覚変数         |
+|------------------------|------------------|
+| 音符(12音、名義尺度)   | 色               |
+| 音価の差の数(連続変数) | バーグラフの高さ |
+
+より詳しく見るために、音程毎の割合を出しました。
+
+![Figure 3](notediff_prop.html){#fig-3 width="100%" height="5in"}
+
+| データ変数               | 視覚変数         |
+|--------------------------|------------------|
+| 音符(12音、名義尺度)     | 色               |
+| 音価の差の割合(連続変数) | バーグラフの高さ |
 
 ## 考察
 
-Bachはその後のクラシック音楽の基礎を作ったともいえるほどに影響力が大きいとされているので、他の作曲家の曲よりもBachのものを分析できてよかったと思います。また、その後の作曲家に比べて、単純かつ構造がしっかりしているので今回の簡単な分析でも解釈可能な結果になったのはその影響があるかもしれません。
+A minor scaleにある音はA, B, C, D, E, F, Gでできている。\
+
+Note Intervals:
+
+-    Tonic: A is the 1st note of the A natural minor scale.
+-    Major 2nd: B is the 2nd note of the scale.
+-    Minor 3rd: C is the 3rd note of the scale.
+-    Perfect 4th: D is the 4th note of the scale.
+-    Perfect 5th: E is the 5th note of the scale.
+-    Minor 6th: F is the 6th note of the scale.
+-    Minor 7th: G is the 7th note of the scale.
+-    Perfect 8th: A (one octave higher) is the 8th note of the A natural minor scale.
+
+@fig-3 にあるようにスケール上の音は概ね全体の傾向同様+-2の差のを取るのが多い。一方、そうでない音は特定の音程差しかとらない、つまりA#の場合だと特定の9音にしか行かない。
+音楽理論の知識がないので音ごとの分析はできないのですが、面白いと感じたのは絶対に行かない音がほとんどの音ごとにあるということ。例えばFは-1の音は絶対に取らない、など。今回のscaleの1音目であるAでも、+6音の音は取らないです。
+
+Bachはその後のクラシック音楽の基礎を作ったともいえるほどに影響力が大きいとされているので、他の作曲家の曲よりもBachのものを分析できてよかったと思います。また、その後の作曲家に比べて、単純かつ構造がしっかりしているので今回の簡単な分析でも解釈可能?な結果になったのはその影響があるかもしれません。
 
 ## Future directions
 
@@ -103,6 +152,6 @@ Kulkarni, S., David, S. U., Lynn, C. W., & Bassett, D. S. (2024). Information co
 
 こちらの論文ではBachの楽曲の各音符をノードに、音符間の各遷移をエッジにネットワーク分析していました。このように数学的に構造化できたら音楽も分析できるのかなと感じました。
 
-# コードかコードへのリンク（あれば）
+# コードへのリンク
 
 Github repository link: <https://github.com/Higashiguchi-Rinhi/infovis-notebooks/blob/658a3842b65907151da01ff55cbed7bbdf30f7b9/final_project/project.ipynb>

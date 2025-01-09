@@ -55,13 +55,14 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#曲を分けて曲の中でのメロディーラインをつなげる" id="toc-曲を分けて曲の中でのメロディーラインをつなげる" class="nav-link" data-scroll-target="#曲を分けて曲の中でのメロディーラインをつなげる"><strong>曲を分けて、曲の中でのメロディーラインをつなげる</strong></a></li>
   </ul></li>
   </ul></li>
-  <li><a href="#データ変数と視覚変数の対応関係" id="toc-データ変数と視覚変数の対応関係" class="nav-link" data-scroll-target="#データ変数と視覚変数の対応関係">データ変数と視覚変数の対応関係</a></li>
   <li><a href="#可視化作品と考察" id="toc-可視化作品と考察" class="nav-link" data-scroll-target="#可視化作品と考察">可視化作品と考察</a>
   <ul class="collapse">
+  <li><a href="#音価の変化と時間" id="toc-音価の変化と時間" class="nav-link" data-scroll-target="#音価の変化と時間">音価の変化と時間</a></li>
+  <li><a href="#音価の変化とその数" id="toc-音価の変化とその数" class="nav-link" data-scroll-target="#音価の変化とその数">音価の変化とその数</a></li>
   <li><a href="#考察" id="toc-考察" class="nav-link" data-scroll-target="#考察">考察</a></li>
   <li><a href="#future-directions" id="toc-future-directions" class="nav-link" data-scroll-target="#future-directions">Future directions</a></li>
   </ul></li>
-  <li><a href="#コードかコードへのリンクあれば" id="toc-コードかコードへのリンクあれば" class="nav-link" data-scroll-target="#コードかコードへのリンクあれば">コードかコードへのリンク（あれば）</a></li>
+  <li><a href="#コードへのリンク" id="toc-コードへのリンク" class="nav-link" data-scroll-target="#コードへのリンク">コードへのリンク</a></li>
   </ul>
 <div class="quarto-code-links"><h2>Code Links</h2><ul><li><a href="https://github.com/Higashiguchi-Rinhi/infovis-notebooks/blob/658a3842b65907151da01ff55cbed7bbdf30f7b9/final_project/project.ipynb"><i class="bi bi-link-45deg"></i>Code for Analysis</a></li></ul></div></nav>
 </div>
@@ -165,14 +166,117 @@ ul.task-list li input[type="checkbox"] {
 </section>
 </section>
 </section>
-<section id="データ変数と視覚変数の対応関係" class="level1">
-<h1>データ変数と視覚変数の対応関係</h1>
-</section>
 <section id="可視化作品と考察" class="level1">
 <h1>可視化作品と考察</h1>
+<section id="音価の変化と時間" class="level2">
+<h2 class="anchored" data-anchor-id="音価の変化と時間">音価の変化と時間</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><embed src="notediff_time.html" style="width:100.0%;height:7in"></p>
+<figcaption>Figure 1</figcaption>
+</figure>
+</div>
+<p>データ変数と視覚変数の対応関係</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>データ変数</th>
+<th>視覚変数</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>音符(12音、名義尺度)</td>
+<td>色</td>
+</tr>
+<tr class="even">
+<td>音価の差(連続変数)</td>
+<td>y軸上の高さ</td>
+</tr>
+</tbody>
+</table>
+<p>これを見るだけでは似たようなトレンドがあるかもしれない、ということしかわからない。</p>
+</section>
+<section id="音価の変化とその数" class="level2">
+<h2 class="anchored" data-anchor-id="音価の変化とその数">音価の変化とその数</h2>
+<p>音価の変化とその数を図示。<br>
+このとき、音符の情報も色として積み上げ棒グラフに入れる。<br>
++-2の音の差が多いことが分かります。</p>
+<div id="fig-2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<embed src="notediff_count_all.html" style="width:100.0%;height:3in">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Figure 2
+</figcaption>
+</figure>
+</div>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>データ変数</th>
+<th>視覚変数</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>音符(12音、名義尺度)</td>
+<td>色</td>
+</tr>
+<tr class="even">
+<td>音価の差の数(連続変数)</td>
+<td>バーグラフの高さ</td>
+</tr>
+</tbody>
+</table>
+<p>より詳しく見るために、音程毎の割合を出しました。</p>
+<div id="fig-3" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<embed src="notediff_prop.html" style="width:100.0%;height:5in">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Figure 3
+</figcaption>
+</figure>
+</div>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>データ変数</th>
+<th>視覚変数</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>音符(12音、名義尺度)</td>
+<td>色</td>
+</tr>
+<tr class="even">
+<td>音価の差の割合(連続変数)</td>
+<td>バーグラフの高さ</td>
+</tr>
+</tbody>
+</table>
+</section>
 <section id="考察" class="level2">
 <h2 class="anchored" data-anchor-id="考察">考察</h2>
-<p>Bachはその後のクラシック音楽の基礎を作ったともいえるほどに影響力が大きいとされているので、他の作曲家の曲よりもBachのものを分析できてよかったと思います。また、その後の作曲家に比べて、単純かつ構造がしっかりしているので今回の簡単な分析でも解釈可能な結果になったのはその影響があるかもしれません。</p>
+<p>A minor scaleにある音はA, B, C, D, E, F, Gでできている。<br>
+</p>
+<p>Note Intervals:</p>
+<ul>
+<li>Tonic: A is the 1st note of the A natural minor scale.</li>
+<li>Major 2nd: B is the 2nd note of the scale.</li>
+<li>Minor 3rd: C is the 3rd note of the scale.</li>
+<li>Perfect 4th: D is the 4th note of the scale.</li>
+<li>Perfect 5th: E is the 5th note of the scale.</li>
+<li>Minor 6th: F is the 6th note of the scale.</li>
+<li>Minor 7th: G is the 7th note of the scale.</li>
+<li>Perfect 8th: A (one octave higher) is the 8th note of the A natural minor scale.</li>
+</ul>
+<p><a href="#fig-3" class="quarto-xref">Figure&nbsp;2</a> にあるようにスケール上の音は概ね全体の傾向同様+-2の差のを取るのが多い。一方、そうでない音は特定の音程差しかとらない、つまりA#の場合だと特定の9音にしか行かない。 音楽理論の知識がないので音ごとの分析はできないのですが、面白いと感じたのは絶対に行かない音がほとんどの音ごとにあるということ。例えばFは-1の音は絶対に取らない、など。今回のscaleの1音目であるAでも、+6音の音は取らないです。</p>
+<p>Bachはその後のクラシック音楽の基礎を作ったともいえるほどに影響力が大きいとされているので、他の作曲家の曲よりもBachのものを分析できてよかったと思います。また、その後の作曲家に比べて、単純かつ構造がしっかりしているので今回の簡単な分析でも解釈可能?な結果になったのはその影響があるかもしれません。</p>
 </section>
 <section id="future-directions" class="level2">
 <h2 class="anchored" data-anchor-id="future-directions">Future directions</h2>
@@ -191,8 +295,8 @@ ul.task-list li input[type="checkbox"] {
 <p>こちらの論文ではBachの楽曲の各音符をノードに、音符間の各遷移をエッジにネットワーク分析していました。このように数学的に構造化できたら音楽も分析できるのかなと感じました。</p>
 </section>
 </section>
-<section id="コードかコードへのリンクあれば" class="level1">
-<h1>コードかコードへのリンク（あれば）</h1>
+<section id="コードへのリンク" class="level1">
+<h1>コードへのリンク</h1>
 <p>Github repository link: <a href="https://github.com/Higashiguchi-Rinhi/infovis-notebooks/blob/658a3842b65907151da01ff55cbed7bbdf30f7b9/final_project/project.ipynb" class="uri">https://github.com/Higashiguchi-Rinhi/infovis-notebooks/blob/658a3842b65907151da01ff55cbed7bbdf30f7b9/final_project/project.ipynb</a></p>
 </section>
 
