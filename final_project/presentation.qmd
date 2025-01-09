@@ -1,0 +1,78 @@
+---
+title: "Final presentation 10 Jan"
+author: "Tan Rinhi"
+format:
+  html:toc
+      toc-location: right
+      code-links:
+      - text: Code for Analysis
+        href: https://github.com/Higashiguchi-Rinhi/infovis-notebooks/blob/658a3842b65907151da01ff55cbed7bbdf30f7b9/final_project/project.ipynb
+jupyter: python3
+---
+
+# 答えたい問い
+
+・世の中のメロディー大体そんなに遠い音に行かないのではないのか、音が移るのには規則があるのではないか。\
+・音自体がどこに行くのが多いのか、1,2,5音とか。\
+・（時間があれば）楽器によってそれが変わるのか
+
+# データの概要、取得と前処理の方法
+
+以下の論文からのデータセットを使用する。
+
+::: {.callout-note appearance="minimal"} John Thickstun, Zaid Harchaoui, & Sham M. Kakade. (2016). MusicNet (1.0) \[Data set\]. Zenodo. https://doi.org/10.5281/zenodo.5120004 :::
+
+kaggle.comにあったデータの概要は以下のようになっている。 ::: {.callout-note appearance="minimal"} MusicNet is a collection of 330 freely-licensed classical music recordings, together with over 1 million annotated labels indicating the precise time of each note in every recording, the instrument that plays each note, and the note's position in the metrical structure of the composition. The labels are acquired from musical scores aligned to recordings by dynamic time warping. The labels are verified by trained musicians; a labeling error rate of 4% has been estimated. The MusicNet labels are offered to the machine learning and music communities as a resource for training models and a common benchmark for comparing results.
+
+https://www.kaggle.com/datasets/imsparsh/musicnet-dataset :::
+
+実際のデータを見てみると
+
+1.  作曲家
+
+2.  曲名
+
+3.  楽章番号
+
+4.  アンサンブルの種類(solo, quartet etc.)
+
+5.  楽器
+
+6.  音符
+
+7.  音価
+
+8.  音の開始時間
+
+9.  音の終了時間
+
+    といった変数があり、今回気になるのは楽曲、楽章番号、音符、音の開始時間です。
+
+## データの前処理
+
+メタデータと曲ごとのデータがあったので、idを基に両者を合体した。基本的にtidy dataの形になっていた。データの欠測はないことを確認した。
+
+メタデータ上に気になる変数である楽器と音価、が見あたらなかったので、数値として入力されている解読をする。
+
+楽器: [ここから](https://music.stackexchange.com/questions/135779/im-having-difficulty-comprehending-the-timing-information-presented-in-the-csv)取得。
+
+-   1 is Piano (4th and 5th staff)
+-   41 is Violin (1st staff)
+-   42 is Viola (2nd staff)
+-   43 is Cello (3rd staff, upper voice)
+-   44 is Double Bass (3rd staff, lower voice)
+
+音価: 60がmiddle Cということを実際の譜面を見て確認。 この分析ではC4とし、半音あがることで1増える。\
+1オクターブ12音あります。
+
+これを踏まえて0-98の数字を'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'に対応するものに置き換える。
+
+# データ変数と視覚変数の対応関係
+
+# 可視化作品と考察
+
+音の移り替わりなどを見るのに、可能であればinteractiveなもの、<https://www.hooktheory.com/trends#key=A&scale=minor> みたいにできたら面白いと思いました。
+
+# コードかコードへのリンク（あれば）
+
+Github repository link: <https://github.com/Higashiguchi-Rinhi/infovis-notebooks/blob/658a3842b65907151da01ff55cbed7bbdf30f7b9/final_project/project.ipynb>
