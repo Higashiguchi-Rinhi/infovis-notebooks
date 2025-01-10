@@ -86,7 +86,7 @@ https://www.kaggle.com/datasets/imsparsh/musicnet-dataset
 
 ## 音価の変化と時間
 
-![Figure 1](notediff_time.html){width="100%" height="7in"}
+![](notediff_time.html){#fig-1 width="100%" height="7in"}
 
 データ変数と視覚変数の対応関係
 
@@ -103,7 +103,7 @@ https://www.kaggle.com/datasets/imsparsh/musicnet-dataset
 このとき、音符の情報も色として積み上げ棒グラフに入れる。\
 +-2の音の差が多いことが分かります。
 
-![Figure 2](notediff_count_all.html){#fig-2 width="100%" height="3in"}
+![](notediff_count_all.html){#fig-2 width="100%" height="3in"}
 
 | データ変数             | 視覚変数         |
 |------------------------|------------------|
@@ -112,7 +112,7 @@ https://www.kaggle.com/datasets/imsparsh/musicnet-dataset
 
 より詳しく見るために、音程毎の割合を出しました。
 
-![Figure 3](notediff_prop.html){#fig-3 width="100%" height="5in"}
+![](notediff_prop.html){#fig-3 width="100%" height="5in"}
 
 | データ変数               | 視覚変数         |
 |--------------------------|------------------|
