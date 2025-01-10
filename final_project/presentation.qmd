@@ -7,7 +7,7 @@ format:
     toc-location: right
     code-links:
       - text: "Code for Analysis"
-        href: https://github.com/Higashiguchi-Rinhi/infovis-notebooks/blob/658a3842b65907151da01ff55cbed7bbdf30f7b9/final_project/project.ipynb
+        href: https://github.com/Higashiguchi-Rinhi/infovis-notebooks/blob/main/final_project/project.ipynb
 ---
 
 # 答えたい問い
@@ -154,4 +154,4 @@ Kulkarni, S., David, S. U., Lynn, C. W., & Bassett, D. S. (2024). Information co
 
 # コードへのリンク
 
-Github repository link: <https://github.com/Higashiguchi-Rinhi/infovis-notebooks/blob/658a3842b65907151da01ff55cbed7bbdf30f7b9/final_project/project.ipynb>
+Github repository link: <https://github.com/Higashiguchi-Rinhi/infovis-notebooks/blob/main/final_project/project.ipynb>
